@@ -15,22 +15,26 @@ function toggleTheme() {
 window.addEventListener('DOMContentLoaded', function () {
     const audio = document.querySelector('audio');
     audio.volume = 1;
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            const handleInteraction = () => {
-                audio.play();
-                document.removeEventListener('click', handleInteraction);
-                document.removeEventListener('touchstart', handleInteraction);
-                document.removeEventListener('keydown', handleInteraction);
-            };
 
-            document.addEventListener('click', handleInteraction);
-            document.addEventListener('touchstart', handleInteraction);
-            document.addEventListener('keydown', handleInteraction);
+    function playAudio() {
+        audio.play().then(() => {
+            console.log("تم تشغيل الصوت بنجاح 🎵");
+        }).catch((error) => {
+            console.log("المتصفح يمنع التشغيل التلقائي، انتظر تفاعل المستخدم.");
         });
+
+        // إزالة الأحداث بعد التشغيل
+        document.removeEventListener('click', playAudio);
+        document.removeEventListener('touchstart', playAudio);
+        document.removeEventListener('keydown', playAudio);
     }
+
+    // استدعاء تشغيل الصوت عند تفاعل المستخدم الأول
+    document.addEventListener('click', playAudio);
+    document.addEventListener('touchstart', playAudio);
+    document.addEventListener('keydown', playAudio);
 });
+
 
 
 function showNotification() {
