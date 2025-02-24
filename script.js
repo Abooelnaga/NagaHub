@@ -12,29 +12,43 @@ function toggleTheme() {
         icon.classList.add('fa-sun');
     }
 }
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('background-audio');
+    
+    // Function to play audio
+    function playAudio() {
+        audio.play().catch(function(error) {
+            console.log("Audio autoplay failed");
+        });
+    }
+
+    // Try to play audio when page loads
+    playAudio();
+
+    // Play audio on first user interaction
+    document.addEventListener('click', function() {
+        playAudio();
+    }, { once: true });
+});
 window.addEventListener('DOMContentLoaded', function () {
     const audio = document.querySelector('audio');
     audio.volume = 1;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(() => {
+            const handleInteraction = () => {
+                audio.play();
+                document.removeEventListener('click', handleInteraction);
+                document.removeEventListener('touchstart', handleInteraction);
+                document.removeEventListener('keydown', handleInteraction);
+            };
 
-    function playAudio() {
-        audio.play().then(() => {
-            console.log("تم تشغيل الصوت بنجاح 🎵");
-        }).catch((error) => {
-            console.log("المتصفح يمنع التشغيل التلقائي، انتظر تفاعل المستخدم.");
+            document.addEventListener('click', handleInteraction);
+            document.addEventListener('touchstart', handleInteraction);
+            document.addEventListener('keydown', handleInteraction);
         });
-
-        // إزالة الأحداث بعد التشغيل
-        document.removeEventListener('click', playAudio);
-        document.removeEventListener('touchstart', playAudio);
-        document.removeEventListener('keydown', playAudio);
     }
-
-    // استدعاء تشغيل الصوت عند تفاعل المستخدم الأول
-    document.addEventListener('click', playAudio);
-    document.addEventListener('touchstart', playAudio);
-    document.addEventListener('keydown', playAudio);
 });
-
 
 
 function showNotification() {
