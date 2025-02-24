@@ -30,25 +30,35 @@ document.addEventListener('DOMContentLoaded', function() {
         playAudio();
     }, { once: true });
 });
-window.addEventListener('DOMContentLoaded', function () {
-    const audio = document.querySelector('audio');
-    audio.volume = 1;
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            const handleInteraction = () => {
-                audio.play();
-                document.removeEventListener('click', handleInteraction);
-                document.removeEventListener('touchstart', handleInteraction);
-                document.removeEventListener('keydown', handleInteraction);
-            };
-
-            document.addEventListener('click', handleInteraction);
-            document.addEventListener('touchstart', handleInteraction);
-            document.addEventListener('keydown', handleInteraction);
+document.addEventListener('DOMContentLoaded', function() {
+    const audio = document.getElementById('background-audio');
+    
+    function playAudio() {
+        audio.play().catch(error => {
+            console.log("Audio autoplay failed");
         });
     }
+
+    function pauseAudio() {
+        audio.pause();
+    }
+
+    // تشغيل الصوت عند تحميل الصفحة
+    playAudio();
+
+    // تشغيل الصوت عند أول تفاعل من المستخدم
+    document.addEventListener('click', playAudio, { once: true });
+
+    // إيقاف وتشغيل الصوت عند تغيير تركيز الصفحة
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            pauseAudio(); // توقف الصوت عند مغادرة الصفحة
+        } else {
+            playAudio(); // تشغيل الصوت عند العودة
+        }
+    });
 });
+
 
 
 function showNotification() {
