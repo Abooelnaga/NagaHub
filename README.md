@@ -13,7 +13,7 @@
 - 🎨 تصميم بسيط وأنيق باستخدام HTML, CSS, JavaScript.
 - 🌙 دعم للوضع الليلي والنهاري.
 - 🔗 روابط مباشرة لحساباتي وبوتاتي على تيليجرام.
-- 📠 إشعار تذكيري بالصلاة على النبي ﷺ.
+- 🔔 إشعار تذكيري بالصلاة على النبي ﷺ.
 - 🎵 تشغيل تلقائي للصوت عند تحميل الصفحة.
 - 📱 متجاوب مع جميع الأجهزة.
 
@@ -27,11 +27,13 @@
 - **FontAwesome** (لإضافة الأيقونات)
 - **Google Fonts** (لاستخدام خط Tajawal)
 
+تم استخدام **ChatGPT** لتطوير الأفكار وكتابة بعض الأجزاء من الكود، بالإضافة إلى **Code Editor Trae** لتعديل الملفات.
+
 ---
 
 ## 🎨 مصادر الأيقونات والصور | Icons & Images Sources
 
-- **🎼 الصور مأخوذة من:** [Pinterest](https://www.pinterest.com/)
+- **🖼️ الصور مأخوذة من:** [Pinterest](https://www.pinterest.com/)
 - **🔗 الأيقونات مأخوذة من:** [Flaticon](https://www.flaticon.com/)
 
 ---
@@ -47,13 +49,13 @@
 
 ---
 
-## 💌 تواصل معي | Contact Me
+## 📬 تواصل معي | Contact Me
 
-👤 يمكنك التواصل معي عبر:
+📢 لمزيد من المعلومات أو الاقتراحات، تواصل معي عبر تيليجرام:
 
-- 🔗 [Telegram](https://t.me/moonaga)
-- 🔗 [Instagram](https://www.instagram.com/moonaga)
+[![Telegram](https://img.shields.io/badge/Telegram-0088cc?style=for-the-badge&logo=telegram&logoColor=white)](https://t.me/moonaga)
 
 ---
 
-🎉 **شكرًا لزيارتك! لا تنسَ دعم المشروع والمشاركة!**
+🎉 **شكراً لزيارتك! لا تنسَ دعم المشروع والمشاركة!**
+
