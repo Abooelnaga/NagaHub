@@ -1,0 +1,250 @@
+:root {
+    --bg-color: #f5f5f5;
+    --text-color: #2c3e50;
+    --card-bg: #ffffff;
+    --card-hover: #edf2f7;
+    --gradient-start: #4a90e2;
+    --gradient-end: #63b3ed;
+}
+
+
+[data-theme="dark"] {
+    --bg-color: #1a202c;
+    --text-color: #e2e8f0;
+    --card-bg: #2d3748;
+    --card-hover: #4a5568;
+    --gradient-start: #2c5282;
+    --gradient-end: #2b6cb0;
+}
+
+body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.container {
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+.profile {
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: var(--card-bg);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.profile img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 3px solid var(--gradient-end);
+    padding: 3px;
+}
+
+.profile h1 {
+    color: var(--text-color);
+    margin: 10px 0;
+}
+
+.profile .bio {
+    color: var(--text-color);
+    margin: 15px auto 25px;
+    max-width: 80%;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    opacity: 0.9;
+    padding: 0 10px;
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.links-section:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.links-section:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.links-section:nth-child(3) {
+    animation-delay: 0.9s;
+}
+
+
+.section-title {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.link {
+    background: var(--card-bg);
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.link:hover {
+    transform: translateY(-2px);
+    background: var(--card-hover);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Social Media Icons Styles */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid transparent;
+}
+
+.social-icon:hover {
+    transform: translateY(-3px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    border: 2px solid var(--gradient-end);
+}
+
+/* Specific colors for each social media platform */
+.social-icon:hover .fa-instagram {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.social-icon:hover .fa-telegram {
+    color: #0088cc;
+}
+
+.social-icon:hover .fa-linkedin {
+    color: #0077b5;
+}
+
+.social-icon:hover .fa-github {
+    color: var(--text-color);
+}
+
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+
+    .link {
+        padding: 12px 15px;
+    }
+
+    .profile .bio {
+        max-width: 95%;
+    }
+
+    /* Mobile responsive styles for social icons */
+    .social-icons {
+        gap: 15px;
+    }
+
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+}
+
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: -300px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-size: 1.1rem;
+    transition: right 0.5s ease;
+    border: 2px solid var(--gradient-end);
+    z-index: 1000;
+}
+
+.notification.show {
+    right: 20px;
+}
+
+.footer-quote {
+    margin-top: 40px;
+    padding: 20px;
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    opacity: 0.9;
+    border-top: 2px solid var(--gradient-end);
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    animation-delay: 1.2s;
+}
