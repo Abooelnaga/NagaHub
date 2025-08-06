@@ -1,23 +1,47 @@
-function toggleTheme() {
+// Theme management functions
+function saveThemePreference(isDark) {
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+}
+
+function loadThemePreference() {
+    return localStorage.getItem('theme') || 'light';
+}
+
+function applyTheme(isDark) {
     const body = document.body;
     const icon = document.querySelector('.theme-toggle i');
 
-    if (body.getAttribute('data-theme') === 'dark') {
-        body.removeAttribute('data-theme');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    } else {
+    if (isDark) {
         body.setAttribute('data-theme', 'dark');
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
+    } else {
+        body.removeAttribute('data-theme');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
     }
 }
-document.addEventListener('DOMContentLoaded', function() {
+
+function toggleTheme() {
+    const body = document.body;
+    const isCurrentlyDark = body.getAttribute('data-theme') === 'dark';
+    const newTheme = !isCurrentlyDark;
+
+    applyTheme(newTheme);
+    saveThemePreference(newTheme);
+}
+
+// Initialize theme on page load
+document.addEventListener('DOMContentLoaded', function () {
+    const savedTheme = loadThemePreference();
+    const isDark = savedTheme === 'dark';
+    applyTheme(isDark);
+
     const audio = document.getElementById('background-audio');
-    
+
     // Function to play audio
     function playAudio() {
-        audio.play().catch(function(error) {
+        audio.play().catch(function (error) {
             console.log("Audio autoplay failed");
         });
     }
@@ -26,13 +50,13 @@ document.addEventListener('DOMContentLoaded', function() {
     playAudio();
 
     // Play audio on first user interaction
-    document.addEventListener('click', function() {
+    document.addEventListener('click', function () {
         playAudio();
     }, { once: true });
 });
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('background-audio');
-    
+
     function playAudio() {
         audio.play().catch(error => {
             console.log("Audio autoplay failed");
@@ -50,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('click', playAudio, { once: true });
 
     // إيقاف وتشغيل الصوت عند تغيير تركيز الصفحة
-    document.addEventListener('visibilitychange', function() {
+    document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
             pauseAudio(); // توقف الصوت عند مغادرة الصفحة
         } else {

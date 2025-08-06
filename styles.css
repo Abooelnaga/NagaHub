@@ -78,6 +78,7 @@ body {
 .profile h1 {
     color: var(--text-color);
     margin: 10px 0;
+    font-family: 'Tajawal', sans-serif;
 }
 
 .profile .bio {
