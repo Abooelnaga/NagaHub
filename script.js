@@ -36,66 +36,42 @@ document.addEventListener('DOMContentLoaded', function () {
     const savedTheme = loadThemePreference();
     const isDark = savedTheme === 'dark';
     applyTheme(isDark);
-
-    const audio = document.getElementById('background-audio');
-
-    // Function to play audio
-    function playAudio() {
-        audio.play().catch(function (error) {
-            console.log("Audio autoplay failed");
-        });
-    }
-
-    // Try to play audio when page loads
-    playAudio();
-
-    // Play audio on first user interaction
-    document.addEventListener('click', function () {
-        playAudio();
-    }, { once: true });
 });
+
+
+
+
+
+
+// وظائف الأوصاف التفاعلية للروابط
 document.addEventListener('DOMContentLoaded', function () {
-    const audio = document.getElementById('background-audio');
+    const links = document.querySelectorAll('.link[data-description]');
+    const tooltip = document.getElementById('link-tooltip');
+    const tooltipContent = tooltip.querySelector('.tooltip-content');
 
-    function playAudio() {
-        audio.play().catch(error => {
-            console.log("Audio autoplay failed");
+    links.forEach(link => {
+        const linkTitle = link.querySelector('.link-title');
+        const linkDescription = link.querySelector('.link-description');
+
+        // التأكد من وجود العناصر
+        if (!linkTitle || !linkDescription) return;
+
+        link.addEventListener('mouseenter', function () {
+            // إخفاء العنوان وإظهار الوصف
+            linkTitle.style.opacity = '0';
+            linkTitle.style.transform = 'translateY(-20px)';
+
+            linkDescription.style.opacity = '1';
+            linkDescription.style.transform = 'translate(-50%, -50%) translateY(0)';
         });
-    }
 
-    function pauseAudio() {
-        audio.pause();
-    }
+        link.addEventListener('mouseleave', function () {
+            // إظهار العنوان وإخفاء الوصف
+            linkTitle.style.opacity = '1';
+            linkTitle.style.transform = 'translateY(0)';
 
-    // تشغيل الصوت عند تحميل الصفحة
-    playAudio();
-
-    // تشغيل الصوت عند أول تفاعل من المستخدم
-    document.addEventListener('click', playAudio, { once: true });
-
-    // إيقاف وتشغيل الصوت عند تغيير تركيز الصفحة
-    document.addEventListener('visibilitychange', function () {
-        if (document.hidden) {
-            pauseAudio(); // توقف الصوت عند مغادرة الصفحة
-        } else {
-            playAudio(); // تشغيل الصوت عند العودة
-        }
+            linkDescription.style.opacity = '0';
+            linkDescription.style.transform = 'translate(-50%, -50%) translateY(20px)';
+        });
     });
 });
-
-
-
-function showNotification() {
-    const notification = document.getElementById('prophet-reminder');
-    notification.classList.add('show');
-
-    setTimeout(() => {
-        notification.classList.remove('show');
-    }, 3000);
-}
-
-// Show notification every 5 minutes
-setInterval(showNotification, 900000);
-
-// Show first notification after 10 seconds
-setTimeout(showNotification, 10000);
